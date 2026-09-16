@@ -76,7 +76,13 @@ public class GamesLibraryMain {
                     }
                     break;
                 }//fim case 3
+
+                case 7 : {
+                    break;
+                }
+
             }
+
         }
     }
 }
