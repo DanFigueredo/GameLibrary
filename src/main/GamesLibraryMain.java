@@ -10,6 +10,7 @@ public class GamesLibraryMain {
         Scanner scanner = new Scanner (System.in);
         ArrayList<Game> games = new ArrayList<>();
         int option;
+
         while(true){
             System.out.println("\n1 - Register game\n" +
                     "2 - List games\n" +
@@ -41,6 +42,7 @@ public class GamesLibraryMain {
                     game.setReleaseYear(scanner.nextInt());
 
                     games.add(game);
+                    System.out.println("===== Game added successfully =====");
                     break;
                 }//end case 1
 
@@ -49,6 +51,7 @@ public class GamesLibraryMain {
                         System.out.println("The list is empty");
                         continue;
                     }
+                    System.out.println("===== Game List: ======");
                     for (int i = 0; i < games.size(); i++){
                         Game game = games.get(i);
                         game.showData();
@@ -59,7 +62,7 @@ public class GamesLibraryMain {
 
                 case 3 : {
                     String search;
-                    System.out.print("Enter the game name you want to search: ");
+                    System.out.print("Enter the game name you want to search: \n");
                     search = scanner.nextLine().trim();
                     boolean found = false;
 
@@ -75,7 +78,30 @@ public class GamesLibraryMain {
                         }
                     }
                     break;
-                }//fim case 3
+                }//end case 3
+
+                case 4 : {
+                    int optToRemove = -1;
+                    if (games.isEmpty()) {
+                        System.out.println("There are no games to remove.");
+                        break;
+                    }
+                    System.out.println("Game list: ");
+                    for (int i = 0; i < games.size(); i++){
+                        Game game = games.get(i);
+                        System.out.println(i+1 +  " " + game.getName());
+                    }
+                    System.out.print("Choose Which game you want to remove: ");
+                    optToRemove = scanner.nextInt();
+                    if (optToRemove <= 0 || optToRemove > games.size()){
+                        System.out.println("Invalid option!");
+                        continue;
+                    }
+
+                    games.remove(optToRemove - 1);
+                    System.out.println("====== Game removed successfully ======");
+                    break;
+                }//end case 4
 
                 case 7 : {
                     break;
