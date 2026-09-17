@@ -61,6 +61,10 @@ public class GamesLibraryMain {
                 }//end case 2
 
                 case 3 : {
+                    if (games.isEmpty()) {
+                        System.out.println("There are no games to search.");
+                        break;
+                    }
                     String search;
                     System.out.print("Enter the game name you want to search: \n");
                     search = scanner.nextLine().trim();
@@ -75,6 +79,7 @@ public class GamesLibraryMain {
                         }
                         if (!found) {
                             System.out.println("This game does not exist in the list. Please add it.");
+                            break;
                         }
                     }
                     break;
@@ -89,7 +94,7 @@ public class GamesLibraryMain {
                     System.out.println("Game list: ");
                     for (int i = 0; i < games.size(); i++){
                         Game game = games.get(i);
-                        System.out.println(i+1 +  " " + game.getName());
+                        System.out.println(i+1 +  " - " + game.getName());
                     }
                     System.out.print("Choose Which game you want to remove: ");
                     optToRemove = scanner.nextInt();
@@ -102,6 +107,43 @@ public class GamesLibraryMain {
                     System.out.println("====== Game removed successfully ======");
                     break;
                 }//end case 4
+
+                case 5 : {
+                    int optToAddPrice = -1;
+                    double priceUp = 0.0;
+                    if (games.isEmpty()) {
+                        System.out.println("There are no games to update.");
+                        break;
+                    }
+                    System.out.println("Game list: ");
+                    for (int i = 0; i < games.size(); i++){
+                        Game game = games.get(i);
+                        System.out.println(i+1 +  " - " + game.getName());
+                    }
+
+                    System.out.print("Choose Which game you want to update price: ");
+                    optToAddPrice = scanner.nextInt();
+                    if (optToAddPrice <= 0 || optToAddPrice > games.size()){
+                        System.out.println("Invalid option!");
+                        continue;
+                    }
+
+                    System.out.print("Enter the new price: ");
+                    priceUp = scanner.nextDouble();
+
+                    if (priceUp < 0){
+                        System.out.println("Invalid price");
+                        continue;
+                    }
+                    Game game = games.get(optToAddPrice - 1);
+                    game.setPrice(priceUp);
+
+                    System.out.println("======" + game.getName() + " Price updated successfully======");
+
+                    break;
+                }//end case 5
+
+
 
                 case 7 : {
                     break;
