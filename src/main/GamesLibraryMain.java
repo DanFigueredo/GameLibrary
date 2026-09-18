@@ -10,8 +10,9 @@ public class GamesLibraryMain {
         Scanner scanner = new Scanner (System.in);
         ArrayList<Game> games = new ArrayList<>();
         int option;
+        boolean running = true;
 
-        while(true){
+        while(running = true){
             System.out.println("\n1 - Register game\n" +
                     "2 - List games\n" +
                     "3 - Search game\n" +
@@ -77,10 +78,11 @@ public class GamesLibraryMain {
                             found = true;
                             break;
                         }
-                        if (!found) {
-                            System.out.println("This game does not exist in the list. Please add it.");
-                            break;
-                        }
+
+                    }
+                    if (!found) {
+                        System.out.println("This game does not exist in the list. Please add it.");
+                        break;
                     }
                     break;
                 }//end case 3
@@ -143,14 +145,57 @@ public class GamesLibraryMain {
                     break;
                 }//end case 5
 
+                case 6 : {
+                    if (games.isEmpty()){
+                        System.out.println("The list is empty!");
+                        break;
+                    }
+                    Game game = games.get(0);
+                    double mostExpensive = 0.0;
+                    double cheapest = 0.0;
+                    double averagePrice = 0.0;
+                    String nameCheapest = game.getName();
+                    String nameExpensive = game.getName();
+                    cheapest = game.getPrice();
+                    mostExpensive = game.getPrice();
+                    for (int i = 0; i < games.size(); i++){
+                        game = games.get(i);
 
+                        averagePrice += game.getPrice();
+                        if (game.getPrice() > mostExpensive){
+                            mostExpensive = game.getPrice();
+                            nameExpensive = game.getName();
+                        }
+
+                        if (game.getPrice() < cheapest){
+                            cheapest = game.getPrice();
+                            nameCheapest = game.getName();
+                        }
+                    }
+
+                    averagePrice = averagePrice/ games.size();
+
+                    System.out.println("===== GAME STATISTICS =====");
+                    System.out.println("Total games: " + games.size());
+                    System.out.printf("Average price: %.2f%n" + averagePrice);
+                    System.out.println("Most expensive: " + nameExpensive + " - " + mostExpensive);
+                    System.out.println("Cheapest: " + nameCheapest + " - " + cheapest);
+                    break;
+
+                }//end case 6
 
                 case 7 : {
+                    System.out.println("Closing program...");
+                    running = false;
                     break;
+
                 }
 
-            }
 
-        }
+
+            }//end switch
+
+
+        }//end while
     }
 }

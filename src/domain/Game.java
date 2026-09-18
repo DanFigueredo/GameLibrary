@@ -49,7 +49,7 @@ public class Game {
     }
 
     public void showData(){
-        System.out.println("Game name: " + getName());
+        System.out.println("\nGame name: " + getName());
         System.out.println("Game price: " + getPrice());
         System.out.println("Game genre: " + getGenre());
         System.out.println("Game release year: " + getReleaseYear());
