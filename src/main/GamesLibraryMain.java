@@ -1,18 +1,25 @@
 package main;
 
 import domain.Game;
+import exceptions.InvalidMenuOptionException;
+import services.ServicesGameLibrary;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class GamesLibraryMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner (System.in);
         ArrayList<Game> games = new ArrayList<>();
-        int option;
+        ServicesGameLibrary service = new ServicesGameLibrary();
+
+        int option = 0;
         boolean running = true;
 
-        while(running = true){
+
+        while(running){
             System.out.println("\n1 - Register game\n" +
                     "2 - List games\n" +
                     "3 - Search game\n" +
@@ -21,9 +28,23 @@ public class GamesLibraryMain {
                     "6 - Show statistics\n" +
                     "7 - Exit");
 
-            System.out.print("Choose any option ( 1 - 7): ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+            try{
+                System.out.print("Choose any option ( 1 - 7): ");
+                option = scanner.nextInt();
+                scanner.nextLine();
+
+            }catch (InputMismatchException e){
+                System.out.println("Please enter a valid number!");
+                scanner.nextLine();
+                continue;
+            }
+            try{
+                service.optionVerify(option);
+            }catch (InvalidMenuOptionException e){
+                System.out.println(e.getMessage());
+                continue;
+            }
+
 
             switch (option){
                 case 1 :{
@@ -177,7 +198,7 @@ public class GamesLibraryMain {
 
                     System.out.println("===== GAME STATISTICS =====");
                     System.out.println("Total games: " + games.size());
-                    System.out.printf("Average price: %.2f%n" + averagePrice);
+                    System.out.printf("Average price: %.2f%n" , averagePrice);
                     System.out.println("Most expensive: " + nameExpensive + " - " + mostExpensive);
                     System.out.println("Cheapest: " + nameCheapest + " - " + cheapest);
                     break;
