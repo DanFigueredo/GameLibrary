@@ -2,6 +2,7 @@ package main;
 
 import domain.Game;
 import exceptions.InvalidMenuOptionException;
+import exceptions.NegativeNumberException;
 import services.ServicesGameLibrary;
 
 import java.util.ArrayList;
@@ -52,10 +53,17 @@ public class GamesLibraryMain {
                     System.out.print("Enter the game name: ");
                     game.setName(scanner.nextLine().trim());
 
-
                     System.out.print("Enter the game price: ");
                     game.setPrice(scanner.nextDouble());
                     scanner.nextLine();
+
+                    try {
+                        service.invalidPrice(game.getPrice());
+                    }catch (NegativeNumberException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
+
 
                     System.out.print("Enter the game genre: ");
                     game.setGenre(scanner.nextLine());

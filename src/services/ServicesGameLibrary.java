@@ -1,6 +1,7 @@
 package services;
 
 import exceptions.InvalidMenuOptionException;
+import exceptions.NegativeNumberException;
 
 public class ServicesGameLibrary {
     public void optionVerify(int opt ){
@@ -8,5 +9,13 @@ public class ServicesGameLibrary {
             throw new InvalidMenuOptionException("Invalid option!!!");
 
         }
+    }
+
+    public void invalidPrice(double price){
+        if (price < 0){
+            throw new NegativeNumberException("Invalid price: price cannot be negative.");
+
+        }
+
     }
 }
