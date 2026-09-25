@@ -1,6 +1,7 @@
 package main;
 
 import domain.Game;
+import exceptions.InvalidGameNameException;
 import exceptions.InvalidMenuOptionException;
 import exceptions.NegativeNumberException;
 import services.ServicesGameLibrary;
@@ -52,6 +53,12 @@ public class GamesLibraryMain {
                     Game game = new Game();
                     System.out.print("Enter the game name: ");
                     game.setName(scanner.nextLine().trim());
+                    try{
+                        service.verifyName(game.getName());
+                    }catch (InvalidGameNameException e){
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
 
                     System.out.print("Enter the game price: ");
                     game.setPrice(scanner.nextDouble());
