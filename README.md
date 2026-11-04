@@ -1,7 +1,5 @@
 # GameLibrary
 
-# GamesLibrary
-
 A Java console application for managing a personal video game collection.
 
 GamesLibrary allows users to register, list, search, remove, and update games, as well as view statistics about their collection.
